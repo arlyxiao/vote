@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 require 'uuidtools'
 class OnlineRecord < ActiveRecord::Base
   belongs_to :user

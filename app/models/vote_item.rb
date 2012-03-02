@@ -1,9 +1,10 @@
 # -*- encoding : utf-8 -*-
 class VoteItem < ActiveRecord::Base
-  validates :item_title, :presence => true
   
   has_many :vote_result_items, :dependent => :destroy
   belongs_to :vote
+  
+  validates :item_title, :presence => true
   
   def selected_count
     return VoteResultItem.where(:vote_item_id => self.id).count

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module SessionsMethods
   def after_logged_in
     # 清除当前用户的“未登陆访问者”记录
