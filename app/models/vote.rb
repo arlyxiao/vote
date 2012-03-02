@@ -3,8 +3,8 @@ class Vote < ActiveRecord::Base
   validates :creator_id, :title, :select_limit, :presence => true
   validate :ensure_at_least_two_items
   
-  has_many :vote_items
-  has_many :vote_result_items
+  has_many :vote_items, :dependent => :destroy
+  has_many :vote_result_items, :through => :vote_items
   belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
   belongs_to :user, :class_name => 'User', :foreign_key => :user_id
   

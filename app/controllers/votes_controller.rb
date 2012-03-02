@@ -95,7 +95,11 @@ class VotesController < ApplicationController
   
   def destroy
     @vote = Vote.find(params[:id])
-    @vote.destroy if @vote.creator == current_user
+    if @vote.creator == current_user
+      @vote.destroy
+      #VoteItem.find_by_vote_id(params[:id]).destroy
+      #VoteResultItem.find_by_vote_id(params[:id]).destroy
+    end
     
     return redirect_to votes_path
   end

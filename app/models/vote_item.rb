@@ -2,7 +2,7 @@
 class VoteItem < ActiveRecord::Base
   validates :item_title, :presence => true
   
-  has_many :vote_result_items
+  has_many :vote_result_items, :dependent => :destroy
   belongs_to :vote
   
   def selected_count
