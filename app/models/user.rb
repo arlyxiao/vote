@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   has_one :online_record, :dependent => :destroy
   has_many :vote_result_items
+  has_many :votes
   
   # 校验部分
   # 不能为空的有：用户名，登录名，电子邮箱
@@ -38,6 +39,12 @@ class User < ActiveRecord::Base
     @password = pwd
     self.salt = "#{self.object_id}#{rand}"
     self.hashed_password = self.encrypted_password(self.password)
+  end
+  
+  def selected_votes
+    VoteResultItem.where(
+	    :user_id => self.id
+	  ).order('id desc').group(:user_id)
   end
   
 end

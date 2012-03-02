@@ -20,6 +20,7 @@ class Vote < ActiveRecord::Base
   def is_single?
     return self.select_limit == 1
   end
+
   
   def selected_items_by_user(user_id, vote_id = self.id)
     VoteResultItem.find_all_by_user_id_and_vote_id(user_id, vote_id)
@@ -30,6 +31,7 @@ class Vote < ActiveRecord::Base
 	    :vote_id => self.id
 	  ).order('id desc').group(:user_id)
   end
+
   
 end
 
