@@ -39,4 +39,7 @@ class User < ActiveRecord::Base
     self.hashed_password = self.encrypted_password(self.password)
   end
   
+  # ----------- 以下是方法扩充
+  include Vote::UserMethods
+  
 end
