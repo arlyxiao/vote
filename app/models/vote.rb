@@ -14,9 +14,7 @@ class Vote < ActiveRecord::Base
 	def ensure_at_least_two_items
 	 if self.vote_items.length < 2
 	   errors.add(:item_title, self.vote_items.length)
-	   return false
-	  end
-	  return true
+	 end
 	end
   
   def is_single?
