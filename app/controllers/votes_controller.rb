@@ -43,8 +43,8 @@ class VotesController < ApplicationController
   def post_vote
     # 先判断是否已经投票过
     @vote_result_item = VoteResultItem.new
-    not_duplicate = @vote_result_item.not_duplicate(current_user.id, params[:vote_result_item][:vote_id])
-    return redirect_to :back unless not_duplicate
+    is_duplicate = @vote_result_item.is_duplicate?(current_user.id, params[:vote_result_item][:vote_id])
+    return redirect_to :back if is_duplicate
   
     select_limit = params[:vote_result_item][:select_limit].to_i
     # 单选
