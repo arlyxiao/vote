@@ -12,10 +12,8 @@ class VoteResultItem < ActiveRecord::Base
 	  return false
   end
   
-	def not_duplicate(user_id = self.user_id, vote_id = self.vote_id)
-	  exists = VoteResultItem.where(:user_id => user_id, :vote_id => vote_id).exists?
-	  return false if exists
-	  return true
+	def is_duplicate?(user_id = self.user_id, vote_id = self.vote_id)
+	  return VoteResultItem.where(:user_id => user_id, :vote_id => vote_id).exists?
 	end
 	
 	def vote_count_by_user(user_id, vote_id)
