@@ -42,9 +42,12 @@ class User < ActiveRecord::Base
   end
   
   def selected_votes
-    VoteResultItem.where(
-	    :user_id => self.id
-	  ).order('id desc').group(:user_id)
+    VoteResultItem.find(
+      :all,
+	    :conditions => {:user_id => self.id},
+	    :group => :vote_id,
+	    :order => 'id desc'
+	  )
   end
   
 end
