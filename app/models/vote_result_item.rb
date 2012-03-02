@@ -20,7 +20,7 @@ class VoteResultItem < ActiveRecord::Base
 	  VoteResultItem.where(
 	    :user_id => user_id, 
 	    :vote_id => vote_id
-	  ).group('user_id').order('id desc').count
+	  ).order('id desc').count
 
 	end
 end
