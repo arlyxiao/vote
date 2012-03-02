@@ -5,3 +5,4 @@ tmp/
 .sass-cache/
 vendor/bundle/*
 .project
+Gemfile.lock
