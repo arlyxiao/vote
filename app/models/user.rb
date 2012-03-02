@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include UserAuthMethods
   
   has_one :online_record, :dependent => :destroy
+  has_many :vote_result_items
   
   # 校验部分
   # 不能为空的有：用户名，登录名，电子邮箱
