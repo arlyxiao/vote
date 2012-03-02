@@ -1,0 +1,12 @@
+A simple vote application which support single and multiple voting both.
+
+Environment
+Ubuntu 11.10
+Rails 3.1.1
+ruby 1.9.3p6 (2011-12-20 revision 34080) [i686-linux]
+gem version 1.8.11
+Bundler version 1.0.21
+
+Installation
+bundle install
+rake db:migrate

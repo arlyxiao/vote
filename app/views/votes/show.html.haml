@@ -1,0 +1,32 @@
+-htitle '投票'
+
+:ruby
+  title = @vote.title
+
+.page-go-back
+  =link_to '返回投票列表', '/votes'
+  
+.page-new-vote
+  = flash.now[:notice]
+
+.page-vote-show
+  .title=title
+  =form_for @vote_result_item, :url => { :action => "post_vote" } do |f|
+    = f.hidden_field :vote_id, :value => @vote.id
+    = f.hidden_field :select_limit, :value => @vote.select_limit
+    
+    .items
+      - @vote.vote_items.each do |l|
+        .item
+          - if @vote.is_single?
+            = f.radio_button :vote_item_id, l.id, :checked => false
+          - else
+            = check_box_tag('vote_items[]', value = l.id, checked = false, options = {})
+          = l.item_title
+    
+    :ruby
+      if @vote_result_item.not_duplicate current_user.id, @vote.id
+    .subm
+      %a.form-submit-button{:href=>'javascript:;'} 投票
+    :ruby
+      end

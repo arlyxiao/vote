@@ -1,0 +1,36 @@
+-htitle '查看投票结果'
+
+:ruby
+  title = @vote.title
+
+.page-go-back
+  =link_to '返回投票列表', '/votes'
+
+.page-vote-result
+  %p= "总共投了 #{@vote.vote_result_items.count} 票"
+  .items
+    - items = @vote.selected_items
+    - items.each do |item|
+      %p= "#{item.user.name} 投了 #{item.vote_count_by_user item.user_id, item.vote_id} 票"
+
+ 
+
+.page-vote-result
+  .title=title
+  
+  .items
+    - @vote.vote_items.each do |item|
+      :ruby
+        selected_count = item.selected_count
+        selected_total = item.selected_by_vote(item.vote_id)
+
+        n = (selected_total > 0)? selected_count.to_f / selected_total : 0
+        percent = number_to_percentage(n * 100, :precision => 1)
+        title = item.item_title
+        
+      .item
+        .t=title
+        .line
+          .p{:style=>"width:#{percent};"}
+        .r #{selected_count} (#{percent})
+ 

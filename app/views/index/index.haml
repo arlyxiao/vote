@@ -1,0 +1,27 @@
+.page-welcome.bold 欢迎你，#{current_user.name}
+
+.page-auth-intro
+  .title 关于如何在开发中使用用户验证的说明
+  .p
+    在 View 和 Controller 层，可以使用以下方法
+  .p
+    .bold current_user
+    获得当前登录的用户对象。如果没有登录，则返回 nil
+  .p
+    .bold logged_in?
+    判断当前是否是登录状态
+
+.p
+  %p= "投过以下投票"
+  - @user.vote_result_items.each do |u|
+  -	items = u.vote.selected_items_by_user u.id
+    %p= "#{u.vote.title}"
+    - items.each do |i|
+      %p= "投过的选项 #{i.vote_item.item_title}, 投了 #{i.vote_count_by_user u.id, u.vote.id} 次"
+
+  
+.page-to-votes
+  =link_to '去投票列表','/votes'
+
+.page-to-logout
+  =link_to "退出登录","/logout"

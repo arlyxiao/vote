@@ -1,0 +1,15 @@
+-htitle '目前的所有投票'
+
+.page-votes
+  %ul
+    -@votes.each do |vote|
+      %li.vote
+        .title=link_to vote.title, vote
+        .ops
+          .see-result=link_to '查看结果', "/votes/#{vote.id}/result"
+          .remove-vote=link_to '删除', vote, :confirm => '确认删除?', :method => :delete
+  
+  .ops
+    %a.create{:href=>'/votes/new'} 创建投票
+    
+    - debug @test
