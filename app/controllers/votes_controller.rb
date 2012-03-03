@@ -2,8 +2,6 @@
 class VotesController < ApplicationController
   def index
     @votes = Vote.all
-    
-    @test = current_user
   end
 
   
@@ -19,12 +17,9 @@ class VotesController < ApplicationController
   def create
     return redirect_to votes_path if params[:vote].blank?
     
-    @vote = Vote.new(params[:vote])
-    @vote.creator = current_user
+    @vote = current_user.votes.build(params[:vote])
+    return redirect_to @vote if @vote.save
 
-    if @vote.save
-      return redirect_to @vote
-    end
     error = @vote.errors.first
 	  flash.now[:error] = "#{error[0]} #{error[1]}"
 	  render :action => :new

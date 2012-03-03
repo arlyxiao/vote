@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120301063747) do
+ActiveRecord::Schema.define(:version => 20120303042342) do
 
   create_table "online_records", :force => true do |t|
     t.integer  "user_id"
@@ -60,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20120301063747) do
   end
 
   create_table "votes", :force => true do |t|
-    t.integer  "creator_id"
+    t.integer  "user_id"
     t.string   "title"
     t.integer  "select_limit"
     t.datetime "created_at"

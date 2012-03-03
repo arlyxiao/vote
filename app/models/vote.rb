@@ -5,13 +5,13 @@ class Vote < ActiveRecord::Base
   
   has_many :vote_items, :dependent => :destroy
   has_many :vote_result_items, :through => :vote_items
-  belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
+  belongs_to :creator, :class_name => 'User'
   
   accepts_nested_attributes_for :vote_items
   
   # --- 校验方法
   
-  validates :creator_id, :title, :select_limit, :presence => true
+  validates :user_id, :title, :select_limit, :presence => true
   
   validate :validate_vote_items_count
   def validate_vote_items_count
