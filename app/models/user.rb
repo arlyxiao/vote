@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   
   has_one :online_record, :dependent => :destroy
   has_many :vote_result_items
-  has_many :votes
+  has_many :votes, :foreign_key => 'creator_id'
   
   # 校验部分
   # 不能为空的有：用户名，登录名，电子邮箱
