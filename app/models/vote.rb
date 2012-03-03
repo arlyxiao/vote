@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
   
   has_many :vote_items, :dependent => :destroy
   has_many :vote_result_items, :through => :vote_items
-  belongs_to :creator, :class_name => 'User'
+  belongs_to :creator, :class_name => 'User', :foreign_key => :user_id
   
   accepts_nested_attributes_for :vote_items
   
