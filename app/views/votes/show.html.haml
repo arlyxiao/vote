@@ -25,7 +25,7 @@
           = l.item_title
     
     :ruby
-      if @vote_result_item.not_duplicate current_user.id, @vote.id
+      unless @vote_result_item.is_duplicate?(current_user.id, @vote.id)
     .subm
       %a.form-submit-button{:href=>'javascript:;'} 投票
     :ruby

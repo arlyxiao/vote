@@ -3,8 +3,8 @@ class Vote < ActiveRecord::Base
   
   # --- 模型关联
   
-  has_many :vote_items
-  has_many :vote_result_items
+  has_many :vote_items, :dependent => :destroy
+  has_many :vote_result_items, :through => :vote_items
   belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
   
   accepts_nested_attributes_for :vote_items
@@ -22,11 +22,11 @@ class Vote < ActiveRecord::Base
     errors.add(:base, '限选数目应至少为1项') if self.select_limit < 1
   end
   
-  # --- 业务逻辑方法
   
   def is_single?
     return 1 == self.select_limit
   end
+
   
   def selected_items_by_user(user_id, vote_id = self.id)
     VoteResultItem.find_all_by_user_id_and_vote_id(user_id, vote_id)
@@ -37,6 +37,7 @@ class Vote < ActiveRecord::Base
 	    :vote_id => self.id
 	  ).order('id desc').group(:user_id)
   end
+
   
   # --- 给其他类扩展的方法
   

@@ -21,7 +21,15 @@ class VoteResultItem < ActiveRecord::Base
 	  VoteResultItem.where(
 	    :user_id => user_id, 
 	    :vote_id => vote_id
-	  ).group('user_id').order('id desc').count
+	  ).order('id desc').count
+
+	end
+	
+	def item_count_by_user(user_id, vote_item_id)
+	  VoteResultItem.where(
+	    :user_id => user_id, 
+	    :vote_item_id => vote_item_id
+	  ).order('id desc').count
 
 	end
 end
