@@ -41,16 +41,6 @@ class User < ActiveRecord::Base
     self.hashed_password = self.encrypted_password(self.password)
   end
   
-
-  def selected_votes
-    VoteResultItem.find(
-      :all,
-	    :conditions => {:user_id => self.id},
-	    :group => :vote_id,
-	    :order => 'id desc'
-	  )
-  end
-  
   # ----------- 以下是方法扩充
   include Vote::UserMethods
   

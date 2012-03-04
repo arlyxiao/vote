@@ -7,10 +7,6 @@ class VotesController < ApplicationController
   
   def new
     @vote = Vote.new
-    
-    2.times do
-    	vote_item = @vote.vote_items.build
-    end
   end
   
   # 创建投票

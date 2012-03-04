@@ -31,11 +31,20 @@ body{
     box-shadow:0 0 5px black inset;
     $h:60px;
     height:$h;line-height:$h;
+    overflow:hidden;
     .title{
       color:white;
       font-size:16px;
       font-weight:bold;
       padding:0 40px;
+      text-shadow:1px 1px 2px black;
+      float:left;
+    }
+    .current-user,.logout{
+      float:left;
+      margin-left:40px;
+      color:white;a{color:white !important;}
+      font-weight:bold;
       text-shadow:1px 1px 2px black;
     }
   }
@@ -152,47 +161,96 @@ body{
 ///////////////////////////////////////////
 
 .page-votes{
+  width:600px;
+  
+  .total-count, .current-user-voted{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
+    span.c{font-size:20px;}
+  }
+  
   ul{
     margin-bottom:20px;
     margin-left:-10px;
+    
+    $bd-color:#EBF5FC;
+    
     li.vote{
       background-color:#F8FCFE;
-      border:solid 1px #EBF5FC;
-      padding:10px;
-      margin-bottom:3px;
-      font-size:14px;
-      overflow:hidden;
-      
-      .title{
-        float:left;
-        width:300px;
-      }
-      .see-result{
-        float:right;
-      }
+      border:solid 1px darken($bd-color, 5%);
+      margin-bottom:6px;padding:10px;
       
       @include transition(background-color ease-in .2s);
       &:hover{
         background-color:white;
       }
+      
+      .ct{
+        overflow:hidden;
+        margin-bottom:10px;
+        padding-bottom:10px;
+        border-bottom:solid 1px $bd-color;
+                
+        .title{
+          font-size:14px;
+          float:left;
+          width:300px;
+        }
+        .ops{
+          float:right;
+          a.see-result{
+          }
+          a.delete{
+          }
+        }
+      }
+      
+      .meta{
+        color:#999;
+        font-size:12px;
+        overflow:hidden;
+        .creator{
+          float:left;
+          line-height:20px;
+        }
+        
+        .voted-users-count{
+          float:left;
+          line-height:20px;
+          margin-left:12px;
+        }
+        
+        .has-voted{
+          float:right;
+          background-color:rgba(darken(#1D99FF,10%),0.9);
+          @include border-radius(2px);
+          line-height:20px;padding:0 5px;
+          color:white;
+        }
+      }
+      
     }
   }
   
-  a.create{
-    @include border-radius(2px);
-    @include gradient(#4BA614, #008C00);
-    border:1px solid #318706;
-    color:white;
-    height:30px;line-height:30px;
-    padding:0 10px;
-    display:block;float:left;
-      
-    &:hover{
+  .list-ops{
+    overflow:hidden;
+    a.create{
+      @include border-radius(2px);
+      @include gradient(#4BA614, #008C00);
+      border:1px solid #318706;
       color:white;
-      @include gradient(darken(#4BA614, 3%), darken(#008C00, 3%));
-      border-color:darken(#318706, 6%);
-      text-decoration:none;
-    };
+      height:30px;line-height:30px;
+      padding:0 10px;
+      display:block;float:left;
+        
+      &:hover{
+        color:white;
+        @include gradient(darken(#4BA614, 3%), darken(#008C00, 3%));
+        border-color:darken(#318706, 6%);
+        text-decoration:none;
+      };
+    }
   }
 }
 

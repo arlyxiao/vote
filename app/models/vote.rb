@@ -22,11 +22,22 @@ class Vote < ActiveRecord::Base
     errors.add(:base, '限选数目应至少为1项') if self.select_limit < 1
   end
   
-  
+  # 当前投票是否是单选
   def is_single?
     return 1 == self.select_limit
   end
-
+  
+  # 判断当前投票有没有指定user参与过
+  def has_voted_by?(user)
+    return false if user.blank?
+    VoteResultItem.where(:user_id => user.id, :vote_id => self.id).exists?
+  end
+  
+  # 返回参与过此投票的用户数组
+  def voted_users
+    # TODO
+    return []
+  end
   
   def selected_items_by_user(user_id, vote_id = self.id)
     VoteResultItem.find_all_by_user_id_and_vote_id(user_id, vote_id)
@@ -54,8 +65,14 @@ class Vote < ActiveRecord::Base
           :all,
           :conditions => { :user_id => self.id },
           :group => :vote_id,
-          :order => 'id desc'
+          :order => 'id DESC'
         )
+      end
+      
+      # 用户参与过的投票
+      def voted_votes
+        # TODO
+        return []
       end
     end
   end

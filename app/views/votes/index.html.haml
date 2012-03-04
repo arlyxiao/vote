@@ -1,15 +1,38 @@
 -htitle '目前的所有投票'
 
+:ruby
+  votes_total_count = Vote.count
+  current_user_voted_count = current_user.voted_votes.length
+
 .page-votes
+  .total-count
+    系统内共有
+    %span.c=votes_total_count
+    个投票
+  .current-user-voted
+    我参与过其中的
+    %span.c='TODO'
+    个
+    
   %ul
     -@votes.each do |vote|
+      :ruby
+        can_delete = (vote.creator == current_user)
+        has_voted = vote.has_voted_by?(current_user)
+        voted_users_count = vote.voted_users.length
+      
       %li.vote
-        .title=link_to vote.title, vote
-        .ops
-          .see-result=link_to '查看结果', "/votes/#{vote.id}/result"
-          .remove-vote=link_to '删除', vote, :confirm => '确认删除?', :method => :delete
+        .ct
+          .title=link_to vote.title, vote
+          .ops
+            -if can_delete
+              =link_to '删除', vote, :confirm => '确认删除?', :method => :delete, :class => 'delete'
+            =link_to '查看结果', "/votes/#{vote.id}/result", :class => 'see-result'
+        .meta
+          .creator 创建者:#{vote.creator.name}
+          .voted-users-count 参与人数:#{'TODO'}
+          -if has_voted
+            .has-voted 我参与过了
   
-  .ops
-    %a.create{:href=>'/votes/new'} 创建投票
-    
-    - debug @test
+  .list-ops
+    %a.create{:href=>'/votes/new'} 创建新投票
