@@ -1,35 +1,18 @@
 # -*- encoding : utf-8 -*-
 class VoteResultItem < ActiveRecord::Base
   
-  belongs_to :user, :class_name => 'User', :foreign_key => :user_id
-  belongs_to :vote_item, :class_name => 'VoteItem', :foreign_key => :vote_item_id
-  belongs_to :vote, :class_name => 'Vote', :foreign_key => :vote_id
+  belongs_to :user
+  belongs_to :vote_item
+  belongs_to :vote
   
-  validates :user_id, :vote_id, :vote_item_id, :select_limit, :presence => true
-  # before_save :not_duplicate
+  validates :user, :vote, :vote_item, :select_limit, :presence => true
   
-  def less_than_select_limit(selected_count)
-    return true if selected_count <= self.select_limit
+  def less_than_select_limit(voted_count)
+    return true if voted_count <= self.select_limit
 	  return false
   end
   
 	def is_duplicate?(user_id = self.user_id, vote_id = self.vote_id)
 	  return VoteResultItem.where(:user_id => user_id, :vote_id => vote_id).exists?
-	end
-	
-	def vote_count_by_user(user_id, vote_id)
-	  VoteResultItem.where(
-	    :user_id => user_id, 
-	    :vote_id => vote_id
-	  ).order('id desc').count
-
-	end
-	
-	def item_count_by_user(user_id, vote_item_id)
-	  VoteResultItem.where(
-	    :user_id => user_id, 
-	    :vote_item_id => vote_item_id
-	  ).order('id desc').count
-
 	end
 end

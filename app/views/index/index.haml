@@ -11,15 +11,14 @@
     .bold logged_in?
     判断当前是否是登录状态
 
-.p
-  %p= "投过以下投票"
-  - @user.selected_votes.each do |u|
-  -	items = u.vote.selected_items_by_user u.id
-    %p= "#{u.vote.title}"
-    - items.each do |i|
-      %p= "投过的选项 #{i.vote_item.item_title}, 投了 #{i.item_count_by_user u.id, u.vote_item.id} 次"
+%p.page-current-user-voted-votes
+  .desc 当前用户参与过以下投票
+  - current_user.voted_votes.each do |vote|
+    .vote
+      %span.title=vote.title
+      %span -
+      %span.voted_count 选择了其中的#{vote.voted_items_by(current_user).count}项
 
-  
 .page-to-votes
   =link_to '去投票列表','/votes'
 

@@ -3,7 +3,6 @@ class IndexController < ApplicationController
   def index
     
     if logged_in?
-      @user = current_user
       return render :template=>'index/index'
     end
     

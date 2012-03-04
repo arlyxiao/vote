@@ -2,35 +2,37 @@
 
 :ruby
   title = @vote.title
+  
+  voted_users = @vote.voted_users
+  voted_users_count = @vote.voted_users.count
+  vote_result_items_count = @vote.vote_result_items.count
 
 .page-go-back
   =link_to '返回投票列表', '/votes'
 
 .page-vote-result
-  %p= "总共投了 #{@vote.vote_result_items.count} 票"
+  %p= "总有有 #{voted_users_count} 人参与"
+  %p= "总共有 #{vote_result_items_count} 人/项 被选择"
   .items
-    - items = @vote.selected_items
-    - items.each do |item|
-      %p= "#{item.user.name} 投了 #{item.vote_count_by_user item.user_id, item.vote_id} 票"
-
- 
+    - voted_users.each do |user|
+      %p= "#{user.name} 选择了其中的 #{@vote.voted_items_by(user).count} 项"
 
 .page-vote-result
   .title=title
-  
   .items
-    - @vote.vote_items.each do |item|
+    - @vote.vote_items.each_with_index do |item, idx|
       :ruby
-        selected_count = item.selected_count
-        selected_total = item.selected_by_vote(item.vote_id)
+        voted_count = item.vote_result_items.count
 
-        n = (selected_total > 0)? selected_count.to_f / selected_total : 0
+        n = (vote_result_items_count > 0)? voted_count.to_f / vote_result_items_count : 0
         percent = number_to_percentage(n * 100, :precision => 1)
         title = item.item_title
         
+        line_klass = "c#{idx % 5}"
+        
       .item
         .t=title
-        .line
+        .line{:class=>line_klass}
           .p{:style=>"width:#{percent};"}
-        .r #{selected_count} (#{percent})
+        .r #{voted_count} (#{percent})
  

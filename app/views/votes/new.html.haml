@@ -13,11 +13,12 @@
     
     .field
       %label.need 选项设置
-      .item-list
-        = f.fields_for :vote_items do |item_f|
+      .item-list.min
+        - 2.times do
           .item
-            = item_f.text_field :item_title
+            %input{:type=>'text', :size=>30, :name=>'vote[vote_items_attributes][][item_title]'}
             %a.delete{:href=>'javascript:;'} 删除
+            
       %a.add-new-item{:href=>'javascript:;'} 增加一项
       
     .field

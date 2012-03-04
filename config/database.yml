@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: vote_dev
   username: root
-  password: '111111'
+  password: root
   pool: 5
   timeout: 5000
   reconnect: true
@@ -13,6 +13,6 @@ test:
   encoding: utf8
   database: vote_test
   username: root
-  password: '111111'
+  password: root
   pool: 5
   timeout: 5000

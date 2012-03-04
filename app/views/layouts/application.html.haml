@@ -19,6 +19,9 @@
       .page-container
         .page-header
           .title=title
+          -if logged_in?
+            .current-user 欢迎你，#{current_user.name}
+            .logout=link_to '退出登录', '/logout'
         .page-content
           = yield
 
