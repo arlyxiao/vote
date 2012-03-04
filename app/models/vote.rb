@@ -42,6 +42,7 @@ class Vote < ActiveRecord::Base
   
   module UserMethods
     def self.included(base)
+      base.has_many :votes, :foreign_key => :creator_id
       base.has_many :vote_result_items
       base.send(:include, InstanceMethods)
     end
