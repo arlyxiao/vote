@@ -30,7 +30,7 @@ class Vote < ActiveRecord::Base
   # 判断当前投票有没有指定user参与过
   def has_voted_by?(user)
     return false if user.blank?
-    VoteResultItem.where(:user_id => user.id, :vote_id => self.id).exists?
+    VoteResult.where(:user_id => user.id, :vote_id => self.id).exists?
   end
   
   # 返回参与过此投票的用户数组
@@ -46,7 +46,9 @@ class Vote < ActiveRecord::Base
   # 返回某用户在此投票下投过的选项
   def voted_items_by(user)
     return [] if user.blank?
-    VoteResultItem.where(:user_id => user.id, :vote_id => self.id)
+    VoteResult.where(:user_id => user.id, :vote_id => self.id).first.vote_result_items.map{|x|
+      x.vote_item
+    }
   end
   
   def selected_items
