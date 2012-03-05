@@ -51,12 +51,6 @@ class Vote < ActiveRecord::Base
     }
   end
   
-  def selected_items
-    VoteResultItem.where(
-	    :vote_id => self.id
-	  ).order('id desc').group(:user_id)
-  end
-
   
   # --- 给其他类扩展的方法
   
