@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305024446) do
+ActiveRecord::Schema.define(:version => 20120305123119) do
 
   create_table "online_records", :force => true do |t|
     t.integer  "user_id"
@@ -51,9 +51,6 @@ ActiveRecord::Schema.define(:version => 20120305024446) do
   end
 
   create_table "vote_result_items", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "vote_id"
-    t.integer  "select_limit"
     t.integer  "vote_item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
