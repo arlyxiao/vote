@@ -10,5 +10,5 @@
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE votes")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE vote_items")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE vote_result_items")
-
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE vote_results")
 

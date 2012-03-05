@@ -2,7 +2,7 @@
 class Vote < ActiveRecord::Base
   
   # --- 模型关联
-  
+  has_many :vote_results
   has_many :vote_items, :dependent => :destroy
   has_many :vote_result_items, :through => :vote_items
   belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
@@ -36,9 +36,11 @@ class Vote < ActiveRecord::Base
   # 返回参与过此投票的用户数组
   # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
   def voted_users
-    VoteResultItem.where(:vote_id => self.id).order('id desc').group(:user_id).map {|vote_result_item|
-      vote_result_item.user
-    }
+    self.vote_results.find(
+      :all,
+      :conditinos => {:vote_id => self.id},
+      :order => 'id DESC'
+    ).map{|x| x.user}
   end
   
   # 返回某用户在此投票下投过的选项
@@ -60,6 +62,7 @@ class Vote < ActiveRecord::Base
     def self.included(base)
       base.has_many :votes, :foreign_key => :creator_id
       base.has_many :vote_result_items
+      base.has_many :vote_results
       base.send(:include, InstanceMethods)
     end
     
@@ -68,9 +71,8 @@ class Vote < ActiveRecord::Base
       # 用户参与过的投票
       # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
       def voted_votes
-        self.vote_result_items.find(
+        self.vote_results.find(
           :all,
-          :group => :vote_id,
           :order => 'id DESC'
         ).map{|x| x.vote}
       end

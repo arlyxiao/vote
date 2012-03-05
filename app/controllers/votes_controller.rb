@@ -26,26 +26,17 @@ class VotesController < ApplicationController
     return redirect_to votes_path if params[:id].blank?
     
     @vote = Vote.find(params[:id])
-    @vote_result_item = VoteResultItem.new
+    @vote_result = VoteResult.new
   end
   
   
   # 保存投票结果
   def post_vote
-    # 先判断是否已经投票过
-    @vote_result_item = VoteResultItem.new
-    is_duplicate = @vote_result_item.is_duplicate?(current_user.id, params[:vote_result_item][:vote_id])
-    return redirect_to :back if is_duplicate
-  
-    select_limit = params[:vote_result_item][:select_limit].to_i
+    select_limit = params[:vote_result][:select_limit].to_i
     # 单选
     if select_limit == 1 then
-      return redirect_to :back if params[:vote_result_item][:vote_item_id].blank?
-      
-      @vote_result_item = VoteResultItem.new(params[:vote_result_item])
-      @vote_result_item.user = current_user
-      @vote_result_item.save
-    
+      @vote_result = current_user.vote_results.build(params[:vote_result])
+      @vote_result.save
     end
     
     # 多选
@@ -60,7 +51,7 @@ class VotesController < ApplicationController
 
         @vote_result_item = VoteResultItem.new(params[:vote_result_item])
         
-        if @vote_result_item.less_than_select_limit(items.length)
+        if @vote_result_item.less_than_select_limit?(items.length)
 		      @vote_result_item.user = current_user
 		      @vote_result_item.vote_item_id = vote_item_id
 		      @vote_result_item.save
@@ -73,7 +64,7 @@ class VotesController < ApplicationController
       
     end
     
-    return redirect_to "/votes/#{@vote_result_item.vote_id}/result"
+    return redirect_to "/votes/#{@vote_result.vote_id}/result"
     
   # 结束投票
   end

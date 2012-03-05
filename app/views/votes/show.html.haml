@@ -12,17 +12,16 @@
 
 .page-vote-show
   .title=title
-  =form_for @vote_result_item, :url => { :action => "post_vote" } do |f|
+  =form_for @vote_result, :url => { :action => "post_vote" } do |f|
     = f.hidden_field :vote_id, :value => @vote.id
-    = f.hidden_field :select_limit, :value => @vote.select_limit
     
     .items
       - @vote.vote_items.each do |l|
         .item
           - if @vote.is_single?
-            = f.radio_button :vote_item_id, l.id, :checked => false
+            %input{:type=>'radio', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           - else
-            = check_box_tag('vote_items[]', value = l.id, checked = false, options = {})
+            %input{:type=>'checkbox', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           = l.item_title
     
     - if has_voted
