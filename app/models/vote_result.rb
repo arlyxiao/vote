@@ -9,7 +9,7 @@ class VoteResult < ActiveRecord::Base
   
   # --- 校验方法
   validates :user, :vote, :presence => true
-  validate :is_duplicate?
+  validate vote_result.vote.has_voted_by?(VoteResult.user)
   def is_duplicate?
     if VoteResult.where(:user_id => self.user_id, :vote_id => self.vote_id).exists?
       errors.add(:base, '您已经投过了')
