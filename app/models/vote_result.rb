@@ -15,5 +15,6 @@ class VoteResult < ActiveRecord::Base
       errors.add(:base, '您已经投过了')
     end
   end
+
   
 end
