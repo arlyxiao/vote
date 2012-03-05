@@ -405,11 +405,20 @@ body {
         overflow: hidden;
         margin-bottom: 10px;
         padding-bottom: 10px;
-        border-bottom: solid 1px #ebf5fc; }
+        border-bottom: solid 1px #ebf5fc;
+        line-height: 22px; }
         .page-votes ul li.vote .ct .title {
           font-size: 14px;
           float: left;
           width: 300px; }
+        .page-votes ul li.vote .ct .limit {
+          float: left;
+          background-color: #444;
+          -moz-border-radius: 2px;
+          -webkit-border-radius: 2px;
+          border-radius: 2px;
+          color: white;
+          padding: 0 5px; }
         .page-votes ul li.vote .ct .ops {
           float: right; }
       .page-votes ul li.vote .meta {
@@ -515,8 +524,17 @@ body {
         -moz-border-radius: 2px;
         -webkit-border-radius: 2px;
         border-radius: 2px;
-        background-color: #FC2929;
         height: 20px; }
+      .page-vote-result .items .item .line.c0 .p {
+        background-color: #9BC941; }
+      .page-vote-result .items .item .line.c1 .p {
+        background-color: #E13366; }
+      .page-vote-result .items .item .line.c2 .p {
+        background-color: #FEAE4F; }
+      .page-vote-result .items .item .line.c3 .p {
+        background-color: #269BDC; }
+      .page-vote-result .items .item .line.c4 .p {
+        background-color: #BA6FD7; }
     .page-vote-result .items .item .r {
       float: left;
       color: #666; }

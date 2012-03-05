@@ -191,11 +191,18 @@ body{
         margin-bottom:10px;
         padding-bottom:10px;
         border-bottom:solid 1px $bd-color;
-                
+        line-height:22px;
+        
         .title{
           font-size:14px;
           float:left;
           width:300px;
+        }
+        .limit{
+          float:left;
+          background-color:#444;
+          @include border-radius(2px);
+          color:white;padding:0 5px;
         }
         .ops{
           float:right;
@@ -315,9 +322,15 @@ body{
         width:200px;height:20px;margin-top:6px;margin-right:10px;
         .p{
           @include border-radius(2px);
-          background-color:#FC2929;
+          //background-color:#FC2929;
           height:20px;
         }
+        
+        &.c0 .p{background-color:#9BC941;}
+        &.c1 .p{background-color:#E13366;}
+        &.c2 .p{background-color:#FEAE4F;}
+        &.c3 .p{background-color:#269BDC;}
+        &.c4 .p{background-color:#BA6FD7;}
       }
       .r{float:left;color:#666;}
     }

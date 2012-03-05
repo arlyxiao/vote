@@ -24,6 +24,7 @@
       %li.vote
         .ct
           .title=link_to vote.title, vote
+          .limit=vote_select_limit_desc(vote)
           .ops
             -if can_delete
               =link_to '删除', vote, :confirm => '确认删除?', :method => :delete, :class => 'delete'

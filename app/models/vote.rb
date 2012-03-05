@@ -34,13 +34,17 @@ class Vote < ActiveRecord::Base
   end
   
   # 返回参与过此投票的用户数组
+  # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
   def voted_users
-    # TODO
-    return []
+    VoteResultItem.where(:vote_id => self.id).order('id desc').group(:user_id).map {|vote_result_item|
+      vote_result_item.user
+    }
   end
   
-  def selected_items_by_user(user_id, vote_id = self.id)
-    VoteResultItem.find_all_by_user_id_and_vote_id(user_id, vote_id)
+  # 返回某用户在此投票下投过的选项
+  def voted_items_by(user)
+    return [] if user.blank?
+    VoteResultItem.where(:user_id => user.id, :vote_id => self.id)
   end
   
   def selected_items
@@ -60,19 +64,15 @@ class Vote < ActiveRecord::Base
     end
     
     module InstanceMethods
-      def selected_votes
-        VoteResultItem.find(
-          :all,
-          :conditions => { :user_id => self.id },
-          :group => :vote_id,
-          :order => 'id DESC'
-        )
-      end
       
       # 用户参与过的投票
+      # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
       def voted_votes
-        # TODO
-        return []
+        self.vote_result_items.find(
+          :all,
+          :group => :vote_id,
+          :order => 'id DESC'
+        ).map{|x| x.vote}
       end
     end
   end

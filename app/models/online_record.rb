@@ -69,4 +69,10 @@ class OnlineRecord < ActiveRecord::Base
       rec.destroy
     end
   end
+  
+  module UserMethods
+    def self.included(base)
+      base.has_one :online_record, :dependent => :destroy
+    end
+  end
 end

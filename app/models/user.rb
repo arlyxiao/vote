@@ -1,10 +1,6 @@
 class User < ActiveRecord::Base
   include UserAuthMethods
   
-  has_one :online_record, :dependent => :destroy
-  has_many :vote_result_items
-  has_many :votes, :foreign_key => 'creator_id'
-  
   # 校验部分
   # 不能为空的有：用户名，登录名，电子邮箱
   # 不能重复的有：登录名，电子邮箱（大小写不区分）
@@ -42,8 +38,7 @@ class User < ActiveRecord::Base
   end
   
   # ----------- 以下是方法扩充
+  include OnlineRecord::UserMethods
   include Vote::UserMethods
   
 end
-
-
