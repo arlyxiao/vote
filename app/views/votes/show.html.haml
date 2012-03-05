@@ -24,7 +24,7 @@
             %input{:type=>'checkbox', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           = l.item_title
     
-    - if has_voted
+    - if false #has_voted
       .has-voted 你已经投过票了，每个人只能投一次。
     - else
       .subm

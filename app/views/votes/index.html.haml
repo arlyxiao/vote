@@ -2,7 +2,7 @@
 
 :ruby
   votes_total_count = Vote.count
-  current_user_voted_count = current_user.voted_votes.length
+  current_user_voted_count = current_user.voted_votes.count
 
 .page-votes
   .total-count
@@ -11,7 +11,7 @@
     个投票
   .current-user-voted
     我参与过其中的
-    %span.c= current_user_voted_count
+    %span.c=current_user_voted_count
     个
     
   %ul
@@ -19,7 +19,7 @@
       :ruby
         can_delete = (vote.creator == current_user)
         has_voted = vote.has_voted_by?(current_user)
-        voted_users_count = vote.voted_users.length
+        voted_users_count = vote.voted_users.count
       
       %li.vote
         .ct
@@ -31,7 +31,7 @@
             =link_to '查看结果', "/votes/#{vote.id}/result", :class => 'see-result'
         .meta
           .creator 创建者:#{vote.creator.name}
-          .voted-users-count 参与人数:#{vote.voted_users.count}
+          .voted-users-count 参与人数:#{voted_users_count}
           -if has_voted
             .has-voted 我参与过了
   

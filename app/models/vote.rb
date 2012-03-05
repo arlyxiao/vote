@@ -3,9 +3,13 @@ class Vote < ActiveRecord::Base
   
   # --- 模型关联
   has_many :vote_results, :dependent => :destroy
+  has_many :voted_users, :through => :vote_results, :source => :user
+  
   has_many :vote_items, :dependent => :destroy
   has_many :vote_result_items, :through => :vote_items
+  
   belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
+  
   
   accepts_nested_attributes_for :vote_items
   
@@ -33,16 +37,6 @@ class Vote < ActiveRecord::Base
     VoteResult.where(:user_id => user.id, :vote_id => self.id).exists?
   end
   
-  # 返回参与过此投票的用户数组
-  # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
-  def voted_users
-    self.vote_results.find(
-      :all,
-      :conditions => {:vote_id => self.id},
-      :order => 'id DESC'
-    ).map{|x| x.user}
-  end
-  
   # 返回某用户在此投票下投过的选项
   def voted_items_by(user)
     return [] if user.blank?
@@ -59,19 +53,13 @@ class Vote < ActiveRecord::Base
       base.has_many :votes, :foreign_key => :creator_id
       base.has_many :vote_result_items
       base.has_many :vote_results
+      base.has_many :voted_votes, :through => :vote_results, :source => :vote
+      
       base.send(:include, InstanceMethods)
     end
     
     module InstanceMethods
-      
-      # 用户参与过的投票
-      # TODO 这里需要通过 VoteResult 来避免group查询和多次查询
-      def voted_votes
-        self.vote_results.find(
-          :all,
-          :order => 'id DESC'
-        ).map{|x| x.vote}
-      end
+      # nothing ...
     end
   end
   
