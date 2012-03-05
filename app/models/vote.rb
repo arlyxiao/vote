@@ -2,7 +2,7 @@
 class Vote < ActiveRecord::Base
   
   # --- 模型关联
-  has_many :vote_results
+  has_many :vote_results, :dependent => :destroy
   has_many :voted_users, :through => :vote_results, :source => :user
   
   has_many :vote_items, :dependent => :destroy
@@ -45,12 +45,6 @@ class Vote < ActiveRecord::Base
     }
   end
   
-  def selected_items
-    VoteResultItem.where(
-	    :vote_id => self.id
-	  ).order('id desc').group(:user_id)
-  end
-
   
   # --- 给其他类扩展的方法
   
