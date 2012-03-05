@@ -11,7 +11,7 @@ class Vote < ActiveRecord::Base
   
   # --- 校验方法
   
-  validates :creator_id, :title, :select_limit, :presence => true
+  validates :creator, :title, :select_limit, :presence => true
   
   validate :validate_vote_items_count
   def validate_vote_items_count

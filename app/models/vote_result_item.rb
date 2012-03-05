@@ -5,7 +5,7 @@ class VoteResultItem < ActiveRecord::Base
   belongs_to :vote_item
   belongs_to :vote
   
-  validates :user_id, :vote_id, :vote_item_id, :select_limit, :presence => true
+  validates :user, :vote, :vote_item, :select_limit, :presence => true
   
   def less_than_select_limit(voted_count)
     return true if voted_count <= self.select_limit
