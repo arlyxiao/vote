@@ -38,7 +38,7 @@ class Vote < ActiveRecord::Base
   def voted_users
     self.vote_results.find(
       :all,
-      :conditinos => {:vote_id => self.id},
+      :conditions => {:vote_id => self.id},
       :order => 'id DESC'
     ).map{|x| x.user}
   end
