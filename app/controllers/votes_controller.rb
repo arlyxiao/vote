@@ -4,7 +4,7 @@ class VotesController < ApplicationController
     @votes = Vote.all
   end
 
-  
+
   def new
     @vote = Vote.new
   end
