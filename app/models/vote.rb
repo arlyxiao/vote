@@ -2,7 +2,7 @@
 class Vote < ActiveRecord::Base
   
   # --- 模型关联
-  has_many :vote_results
+  has_many :vote_results, :dependent => :destroy
   has_many :vote_items, :dependent => :destroy
   has_many :vote_result_items, :through => :vote_items
   belongs_to :creator, :class_name => 'User', :foreign_key => :creator_id
