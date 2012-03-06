@@ -1,0 +1,31 @@
+-htitle '目前的所有投票'
+
+.page-votes
+  .current-user-voted
+    我创建的投票总共
+    %span.c= @current_user_votes.count
+    个
+    
+  %ul
+    -@current_user_votes.each do |vote|
+      :ruby
+        can_delete = (vote.creator == current_user)
+        has_voted = vote.has_voted_by?(current_user)
+        voted_users_count = vote.voted_users.count
+      
+      %li.vote
+        .ct
+          .title=link_to vote.title, vote
+          .limit=vote_select_limit_desc(vote)
+          .ops
+            -if can_delete
+              =link_to '删除', vote, :confirm => '确认删除?', :method => :delete, :class => 'delete'
+            =link_to '查看结果', "/votes/#{vote.id}/result", :class => 'see-result'
+        .meta
+          .creator 创建者:#{vote.creator.name}
+          .voted-users-count 参与人数:#{voted_users_count}
+          -if has_voted
+            .has-voted 我参与过了
+  
+  .list-ops
+    %a.create{:href=>'/votes/new'} 创建新投票

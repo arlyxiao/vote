@@ -1,0 +1,17 @@
+-htitle '目前的所有投票'
+
+
+.page-votes
+  .current-user-voted
+    当前投票
+    %span.c= @vote.title
+
+  %p
+    参与投票用户列表
+  %ul
+    -@voted_users.each do |u|
+
+      %li.vote
+        .ct
+          .title=u.user.name
+

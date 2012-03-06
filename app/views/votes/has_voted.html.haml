@@ -1,0 +1,25 @@
+-htitle '目前的所有投票'
+
+.page-votes
+  .total-count
+    系统内共有
+    %span.c= Vote.count
+    个投票
+  .current-user-voted
+    我参与过其中的
+    %span.c= @voted_by_current_user.count
+    个
+    
+  %ul
+    -@voted_by_current_user.each do |v|
+
+      %li.vote
+        .ct
+          .title=link_to v.vote.title, v.vote
+          .limit=vote_select_limit_desc(v.vote)
+          .ops
+            =link_to '查看结果', "/votes/#{v.vote_id}/result", :class => 'see-result'
+        .meta
+          .creator 创建者:#{v.vote.creator.name}
+          .voted-users-count 参与人数:#{v.vote.voted_users.count}
+

@@ -1,14 +1,20 @@
 # -*- encoding : utf-8 -*-
 Voteapp::Application.routes.draw do
-  resources :votes
-
-  match "/votes/:id/result" => "votes#result"
-
   resources :votes do
+    collection do
+      get :byme
+      get :has_voted
+    end
+    
 		member do
-		  post :post_vote
+		  get :voted_users
+		  get :result
 		end
   end
+  
+  resources :votes
+  resources :vote_results
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

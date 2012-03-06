@@ -12,7 +12,7 @@
 
 .page-vote-show
   .title=title
-  =form_for @vote_result, :url => { :action => "post_vote" } do |f|
+  =form_for @vote_result, :url => {:controller=>"vote_results", :action => "create" } do |f|
     = f.hidden_field :vote_id, :value => @vote.id
     
     .items
