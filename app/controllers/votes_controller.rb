@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class VotesController < ApplicationController
-  before_filter :per_load
+  before_filter :pre_load
   
-  def per_load
+  def pre_load
     @vote = Vote.find(params[:id]) if params[:id]
   end
 
