@@ -3,7 +3,7 @@ class VotesController < ApplicationController
   before_filter :per_load
   
   def per_load
-      @vote = Vote.find(params[:id]) if params[:id]
+    @vote = Vote.find(params[:id]) if params[:id]
   end
 
 
