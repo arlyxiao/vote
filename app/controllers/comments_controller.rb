@@ -30,6 +30,6 @@ class CommentsController < ApplicationController
     end
     error = reply_comment.errors.first
     flash[:error] = "#{error[0]} #{error[1]}"
-    redirect_to "/votes/#{@comment.id}/result"
+    redirect_to "/votes/#{vote.id}/result"
   end
 end
