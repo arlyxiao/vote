@@ -10,6 +10,16 @@ Voteapp::Application.routes.draw do
 		  get :voted_users
 		  get :result
 		end
+		
+		resources :comments
+  end
+  
+
+  resources :comments do
+    member do
+      get :reply
+      post :do_reply
+    end
   end
   
   resources :votes

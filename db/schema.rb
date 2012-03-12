@@ -10,7 +10,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305123119) do
+ActiveRecord::Schema.define(:version => 20120312054847) do
+
+  create_table "answer_votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.boolean  "is_vote_up", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "answers", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "question_id"
+    t.text     "content"
+    t.integer  "vote_sum"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "model_id"
+    t.string   "model_type"
+    t.integer  "creator_id"
+    t.text     "content"
+    t.integer  "reply_comment_id"
+    t.integer  "reply_comment_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "online_records", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +49,35 @@ ActiveRecord::Schema.define(:version => 20120305123119) do
 
   add_index "online_records", ["key"], :name => "index_online_records_on_key"
   add_index "online_records", ["user_id"], :name => "index_online_records_on_user_id"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "short_message_readings", :force => true do |t|
+    t.integer  "short_message_id"
+    t.integer  "user_id"
+    t.integer  "contact_user_id"
+    t.boolean  "is_read",          :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "short_messages", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.text     "content"
+    t.boolean  "sender_read",   :default => false
+    t.boolean  "receiver_read", :default => false
+    t.boolean  "sender_hide",   :default => false
+    t.boolean  "receiver_hide", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                      :default => "", :null => false

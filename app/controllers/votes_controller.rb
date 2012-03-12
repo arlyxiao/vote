@@ -39,6 +39,7 @@ class VotesController < ApplicationController
   
   # 显示投票结果
   def result
+    @comments = @vote.comments
   end
   
   

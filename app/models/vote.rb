@@ -45,6 +45,9 @@ class Vote < ActiveRecord::Base
     }
   end
   
+  # 引用其它类
+  include Comment::CommentableMethods
+  
   
   # --- 给其他类扩展的方法
   

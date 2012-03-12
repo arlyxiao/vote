@@ -35,4 +35,29 @@
         .line{:class=>line_klass}
           .p{:style=>"width:#{percent};"}
         .r #{voted_count} (#{percent})
+        
+        
+        
+-@comments.each do |comment|
+  -if comment.reply_comment_id.blank?
+    %div
+      %span=comment.creator.name
+      %span ：
+      %span=comment.content
+      %span=link_to "回复","/comments/#{comment.id}/reply"
+  -else
+    %div  
+      %span  #{comment.creator.name} 回复 #{comment.reply_user.name} : #{comment.content}
+      %span=link_to "回复","/comments/#{comment.id}/reply"
+    
+  
+=flash[:error]
+=form_for @vote.comments.build, :url=>"/votes/#{@vote.id}/comments" do |f|
+  %label 内容
+  %div
+    =f.text_area :content
+  %div
+    =f.submit "评论"
+
+		
  
