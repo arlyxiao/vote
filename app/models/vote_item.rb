@@ -11,5 +11,5 @@ class VoteItem < ActiveRecord::Base
   IMAGE_PATH = "/:class/:attachment/:id/:style/:basename.:extension"
   IMAGE_URL  = "http://storage.aliyun.com/#{OssManager::CONFIG["bucket"]}/:class/:attachment/:id/:style/:basename.:extension"
 
-  base.has_attached_file :image, :storage => :oss, :path => IMAGE_PATH, :url  => IMAGE_URL
+  has_attached_file :image, :storage => :oss, :path => IMAGE_PATH, :url  => IMAGE_URL
 end
