@@ -1,0 +1,12 @@
+development:
+  bucket: mykingla_dev
+  access_key_id: sx50absmkje4tz91vaph131r
+  secret_access_key: 95zX9CFtpQ32W39oDkqGywiw8y4=
+test:
+  bucket: mykingla_dev
+  access_key_id: sx50absmkje4tz91vaph131r
+  secret_access_key: 95zX9CFtpQ32W39oDkqGywiw8y4=
+production:
+  bucket: edu
+  access_key_id: xxx
+  secret_access_key: xxx

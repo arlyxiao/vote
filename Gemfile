@@ -7,6 +7,7 @@ gem 'execjs'
 gem 'therubyracer'
 
 gem 'haml'
+gem 'paperclip', '~> 2.4.5'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.4'
