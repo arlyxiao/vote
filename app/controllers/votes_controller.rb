@@ -14,6 +14,7 @@ class VotesController < ApplicationController
 
   def new
     @vote = Vote.new
+    flash.now[:type] = params[:type]
   end
   
   # 创建投票

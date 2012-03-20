@@ -19,7 +19,8 @@
       - @vote.vote_items.each do |l|
         .item
           - if @vote.is_single?
-            = l.image.url
+            - if flash.now[:type] == 'IMAGE'
+              = l.image.url
             %input{:type=>'radio', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           - else
             = l.image.url
