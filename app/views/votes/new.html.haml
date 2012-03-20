@@ -6,7 +6,7 @@
 .page-new-vote
   = flash.now[:error]
   
-  = form_for @vote, :url => { :action => "create" } do |f|
+  = form_for @vote, :url => { :action => "create" }, :html => { :multipart => true } do |f|
     .field
       %label.need 投票描述
       = f.text_field :title
@@ -17,6 +17,7 @@
         - 2.times do
           .item
             %input{:type=>'text', :size=>30, :name=>'vote[vote_items_attributes][][item_title]'}
+            %input{:type=>'file', :size=>30, :name=>'vote[vote_items_attributes][][image]'}
             %a.delete{:href=>'javascript:;'} 删除
             
       %a.add-new-item{:href=>'javascript:;'} 增加一项
