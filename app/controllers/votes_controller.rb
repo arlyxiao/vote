@@ -14,7 +14,7 @@ class VotesController < ApplicationController
 
   def new
     @vote = Vote.new
-    if params[:type].upcase == 'IMAGE'
+    if params[:kind].upcase == Vote::KIND_IMAGE
       render :action => 'new_image'
     end
   end

@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Vote < ActiveRecord::Base
+  KIND_IMAGE = 'IMAGE'
   
   # --- 模型关联
   has_many :vote_results, :dependent => :destroy

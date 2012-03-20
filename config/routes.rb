@@ -15,7 +15,7 @@ Voteapp::Application.routes.draw do
 		resources :comments
   end
   
-  get 'votes/new/:type' => 'votes#new'
+  get 'votes/new/:kind' => 'votes#new'
   
 
   resources :comments do
