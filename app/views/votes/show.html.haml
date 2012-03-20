@@ -19,11 +19,12 @@
       - @vote.vote_items.each do |l|
         .item
           - if @vote.is_single?
-            - if flash.now[:type] == 'IMAGE'
-              = l.image.url
+            - if @vote.kind == 'IMAGE'
+              %img{:height => "50", :src => l.image.url, :width => "50"}
             %input{:type=>'radio', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           - else
-            = l.image.url
+            - if @vote.kind == 'IMAGE'
+              %img{:height => "50", :src => l.image.url, :width => "50"}
             %input{:type=>'checkbox', :size=>30, :value =>l.id, :name=>'vote_result[vote_result_items_attributes][][vote_item_id]'}
           = l.item_title
     

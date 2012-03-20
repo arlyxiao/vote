@@ -14,7 +14,9 @@ class VotesController < ApplicationController
 
   def new
     @vote = Vote.new
-    flash.now[:type] = params[:type]
+    if params[:type] == 'IMAGE'
+      render :action => 'new_image'
+    end
   end
   
   # 创建投票

@@ -17,6 +17,8 @@
         - 2.times do
           .item
             %input{:type=>'text', :size=>30, :name=>'vote[vote_items_attributes][][item_title]'}
+            = f.hidden_field :kind, :value => 'IMAGE'
+            %input{:type=>'file', :size=>30, :name=>'vote[vote_items_attributes][][image]'}
             %a.delete{:href=>'javascript:;'} 删除
             
       %a.add-new-item{:href=>'javascript:;'} 增加一项
