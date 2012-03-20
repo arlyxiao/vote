@@ -1,6 +1,7 @@
 require 'openssl'
 require 'base64'
 require 'digest/md5'
+require "net/http" 
 
 class Oss
   class NoSuchBucketError < StandardError;end
