@@ -4,12 +4,15 @@ Voteapp::Application.routes.draw do
     collection do
       get :byme
       get :has_voted
-      
     end
     
 		member do
 		  get :voted_users
 		  get :result
+		  
+		  get :add_tag
+      post :do_add_tag
+      delete :remove_tag
 		end
 		
 		resources :comments

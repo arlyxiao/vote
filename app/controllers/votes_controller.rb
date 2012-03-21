@@ -66,5 +66,20 @@ class VotesController < ApplicationController
   def voted_users
     @voted_users = VoteResult.find_all_by_vote_id(params[:id])
   end
+  
+  def add_tag
+  end
+  
+  # 添加标签
+  def do_add_tag
+    @vote.add_tag(current_user,params[:name])
+    redirect_to @vote
+  end
+  
+  # 删除标签
+  def remove_tag
+    @vote.remove_tag(params[:tag_name])
+    redirect_to @vote
+  end
 
 end

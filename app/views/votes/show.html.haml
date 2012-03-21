@@ -12,6 +12,12 @@
 
 .page-vote-show
   .title=title
+  - @vote.tags.each do |tag|
+    %div
+      %span=tag.name
+      =link_to "删除","/votes/#{@vote.id}/remove_tag?tag_name=#{tag.name}",:method=>:delete
+  %div
+    =link_to "增加标签","/votes/#{@vote.id}/add_tag"
   =form_for @vote_result, :url => {:controller=>"vote_results", :action => "create" } do |f|
     = f.hidden_field :vote_id, :value => @vote.id
     

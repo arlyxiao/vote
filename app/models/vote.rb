@@ -48,7 +48,7 @@ class Vote < ActiveRecord::Base
   
   # 引用其它类
   include Comment::CommentableMethods
-  
+  include Tagging::TaggableMethods
   
   # --- 给其他类扩展的方法
   
